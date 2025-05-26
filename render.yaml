@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: bert5
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run bert5.py --server.port 10000
+    disk:
+      name: bert5-disk
+      size_gb: 1
+    autoDeploy: true
+    envVars:
+      - key: STREAMLIT_SERVER_PORT
+        value: "10000"
+
+  - type: web
+    name: dashboard
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run dashboard.py --server.port 10001
+    disk:
+      name: bert5-disk
+      size_gb: 1
+    autoDeploy: true
+    envVars:
+      - key: STREAMLIT_SERVER_PORT
+        value: "10001"
